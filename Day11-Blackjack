@@ -1,0 +1,83 @@
+import art
+import os
+import random
+
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+game_over = False
+
+def change_ace(_card):
+    if sum(_card) > 21 and 11 in _card:
+        _card[_card.index(11)] = 1
+
+def print_current(p_card, d_card):
+    print(f"Your cards: {p_card}, current score: {sum(p_card)}")
+    print(f"Computer's first card: {d_card[0]}")
+
+
+def print_final(p_card, d_card):
+    print(f"Your final hand: {p_card}, final score: {sum(p_card)}")
+    print(f"Computer's final hand: {d_card}, final score: {sum(d_card)}")
+
+def compare_sum(p_card, d_card,rem_card):
+    while sum(d_card) < 17:
+        d_card.append(rem_card.pop())
+        change_ace(d_card)
+    if sum(d_card) > 21:
+        print_final(p_card, d_card)
+        print("Opponent went over. You win 😁")
+    elif sum(p_card) == sum(d_card):
+        print_final(p_card, d_card)
+        print("Draw.")
+    elif sum(p_card) > sum(d_card):
+        print_final(p_card, d_card)
+        print("You win 😃")
+    else:
+        print_final(p_card, d_card)
+        print("You lose 😭")
+
+choice = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ").lower()
+while not game_over:
+    print(art.logo)
+
+    deck = cards.copy()
+    random.shuffle(deck)
+    player_card = []
+    dealer_card = []
+    for i in range(2):
+        player_card.append(deck.pop())
+        dealer_card.append(deck.pop())
+
+    print_current(player_card, dealer_card)
+
+    if sum(player_card) == 21:
+        print_final(player_card, dealer_card)
+        print("You win! You've got Blackjack!")
+    elif sum(dealer_card) == 21:
+        print_final(player_card, dealer_card)
+        print("Lose, opponent has Blackjack 😱")
+    else:
+        is_get_card = True
+        while is_get_card:
+            get_card = input("Type 'y' to get another card, type 'n' to pass: ").lower()
+            if get_card == "y":
+                player_card.append(deck.pop())
+                change_ace(player_card)
+                if sum(player_card) > 21:
+                    print_final(player_card, dealer_card)
+                    print("You went over. You lose 😭")
+                    is_get_card = False
+                elif sum(player_card) == 21:
+                    print_final(player_card, dealer_card)
+                    print("You win! You've got Blackjack!")
+                    is_get_card = False
+                else:
+                    print_current(player_card, dealer_card)
+            else:
+                compare_sum(player_card, dealer_card, deck)
+                is_get_card = False
+    choice = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ").lower()
+    if choice == "n":
+        game_over = True
+    os.system("cls")
+
+
