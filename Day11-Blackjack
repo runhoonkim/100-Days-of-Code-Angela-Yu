@@ -68,7 +68,7 @@ while not game_over:
                     is_get_card = False
                 elif sum(player_card) == 21:
                     print_final(player_card, dealer_card)
-                    print("You win! You've got Blackjack!")
+                    print("You win 😃")
                     is_get_card = False
                 else:
                     print_current(player_card, dealer_card)
