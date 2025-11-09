@@ -1,0 +1,74 @@
+from art import logo, vs
+from game_data import data
+import random
+
+def sample_users(score, users):
+    """
+
+    :param score: the current game score
+    :param users: a list of two influencers to be compared
+    :return: at the beginning of the game (score = 0), randomly pick two users,
+    and then keeps the second user and pick another user
+    """
+    users[0] = users[1]
+    new_user = random.choice(data)
+    if new_user != users[0]:
+        users.append(new_user)
+
+    return users
+
+def print_user(users):
+    print(f"Compare A: {users[0]['name']}, {users[0]['description']}, from {users[0]['country']}.")
+    print(vs)
+    print(f"Compare B: {users[1]['name']}, {users[1]['description']}, from {users[1]['country']}.")
+
+
+def choose_user(users):
+    """
+
+    :param users: a list of two influencers to be compared
+    :return: index of the chosen user (0: "A", 1: "B")
+    """
+
+    choice = input("Who has more followers? Type 'A' or 'B': ").upper()
+
+    # get index of the choice "A" or "B"
+    i = ["A", "B"].index(choice)
+
+    return i
+
+def compare_followers(users, choice):
+    """
+
+    :param users: a list of two influencers to be compared
+    :param choice: the index of the chosen user (0: "A", 1: "B")
+    :return: True if the choice is correct, False otherwise
+    """
+    not_choice = abs(1 - choice)
+    if users[choice]['follower_count'] > users[not_choice]['follower_count']:
+        return True
+    else:
+        return False
+
+def game():
+    game_over = False
+    score = 0
+    users = random.sample(data, 2)
+    print(logo)
+    print_user(users)
+
+    while not game_over:
+        choice = choose_user(users)
+        answer = compare_followers(users, choice)
+        if answer:
+            score += 1
+            print("\n" * 10, logo)
+            print(f"You're right! Current score {score}")
+            users = sample_users(score, users)
+            print_user(users)
+        else:
+            print("\n" * 10, logo)
+            print(f"Sorry, that's wrong. Final score: {score}.")
+            game_over = True
+
+game()
