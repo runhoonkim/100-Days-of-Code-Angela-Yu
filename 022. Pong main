@@ -1,5 +1,7 @@
 from turtle import Turtle, Screen
 from paddle import Paddle
+from ball import Ball
+import time
 
 # TODO 0: set up the screen and draw a dotted line in the middle
 screen = Screen()
@@ -39,9 +41,7 @@ screen.onkey(paddle_r.up, "Up")
 screen.onkey(paddle_r.down, "Down")
 
 
-game_is_on = True
-while game_is_on:
-    screen.update()
+
 
 # TODO 3: create a scoreboard to keep track of the screen
 # TODO 4: create a ball that moves around the screen
@@ -49,5 +49,18 @@ while game_is_on:
 # 4-2: ball should bounce when it touches the bar
 # 4-3: when the ball goes outside the screen, reset game and add score
 
-screen.update()
+ball = Ball()
+
+game_is_on = True
+while game_is_on:
+    screen.update()
+    ball.move()
+    time.sleep(0.1)
+    if ball.xcor() > 390 or ball.ycor() > 290:
+        ball = Ball()
+
+
+
+
+
 screen.exitonclick()
