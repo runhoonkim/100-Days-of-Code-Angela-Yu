@@ -1,0 +1,53 @@
+from turtle import Turtle, Screen
+from paddle import Paddle
+
+# TODO 0: set up the screen and draw a dotted line in the middle
+screen = Screen()
+screen.setup(width=800, height=600)
+screen.bgcolor("black")
+screen.title("Pong")
+
+# draw a vertical dotted line across the screen
+screen.tracer(0)
+turtle = Turtle()
+turtle.speed("fastest")
+turtle.penup()
+turtle.hideturtle()
+turtle.goto(0,-300)
+turtle.setheading(90)
+turtle.pencolor("white")
+turtle.pensize(3)
+for _ in range(30):
+    turtle.forward(10)
+    turtle.pendown()
+    turtle.forward(10)
+    turtle.penup()
+
+
+
+# TODO 1: create two bars one on left the other on right
+paddle_l = Paddle((-350, 0))
+paddle_r = Paddle((350, 0))
+
+
+# TODO 2: using onkey method of screen enable the bar to move
+# 2-1: ws for left bar and up, down for right bar
+screen.listen()
+screen.onkey(paddle_l.up, "w")
+screen.onkey(paddle_l.down, "s")
+screen.onkey(paddle_r.up, "Up")
+screen.onkey(paddle_r.down, "Down")
+
+
+game_is_on = True
+while game_is_on:
+    screen.update()
+
+# TODO 3: create a scoreboard to keep track of the screen
+# TODO 4: create a ball that moves around the screen
+# 4-1: ball should bounce when it goes upper or lower side of the screen
+# 4-2: ball should bounce when it touches the bar
+# 4-3: when the ball goes outside the screen, reset game and add score
+
+screen.update()
+screen.exitonclick()
