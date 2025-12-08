@@ -1,6 +1,7 @@
 from turtle import Turtle, Screen
 from paddle import Paddle
 from ball import Ball
+from scoreboard import Scoreboard
 import time
 
 # TODO 0: set up the screen and draw a dotted line in the middle
@@ -9,23 +10,8 @@ screen.setup(width=800, height=600)
 screen.bgcolor("black")
 screen.title("Pong")
 
-# draw a vertical dotted line across the screen
+
 screen.tracer(0)
-turtle = Turtle()
-turtle.speed("fastest")
-turtle.penup()
-turtle.hideturtle()
-turtle.goto(0,-300)
-turtle.setheading(90)
-turtle.pencolor("white")
-turtle.pensize(3)
-for _ in range(30):
-    turtle.forward(10)
-    turtle.pendown()
-    turtle.forward(10)
-    turtle.penup()
-
-
 
 # TODO 1: create two bars one on left the other on right
 paddle_l = Paddle((-350, 0))
@@ -40,24 +26,38 @@ screen.onkey(paddle_l.down, "s")
 screen.onkey(paddle_r.up, "Up")
 screen.onkey(paddle_r.down, "Down")
 
-
-
-
 # TODO 3: create a scoreboard to keep track of the screen
+scoreboard = Scoreboard()
+
 # TODO 4: create a ball that moves around the screen
-# 4-1: ball should bounce when it goes upper or lower side of the screen
-# 4-2: ball should bounce when it touches the bar
-# 4-3: when the ball goes outside the screen, reset game and add score
 
 ball = Ball()
 
 game_is_on = True
 while game_is_on:
+    time.sleep(0.1)
     screen.update()
     ball.move()
-    time.sleep(0.1)
-    if ball.xcor() > 390 or ball.ycor() > 290:
-        ball = Ball()
+
+    # 4-1: ball should bounce when it goes upper or lower side of the screen
+    if ball.ycor() > 290 or ball.ycor() < -290:
+        ball.bounce_y()
+
+    # 4-2: ball should bounce when it touches the bar
+    if (ball.distance(paddle_r) < 50 and ball.xcor() > 320) or (ball.distance(paddle_l) < 50 and ball.xcor() < -320):
+        ball.bounce_x()
+
+    # 4-3: when the paddle misses the ball and goes outside the screen, reset game and add score
+    # Detect R paddle misses
+    if ball.xcor() > 380:
+        ball.refresh()
+
+    # Detect L paddle misses
+    if ball.xcor() < -380:
+        ball.refresh()
+
+    # if ball.xcor() > 390 or ball.ycor() > 290:
+    #     ball = Ball()
 
 
 
