@@ -1,7 +1,7 @@
 from turtle import Screen
 import time
-from car_manager import CarManager
-from player import Player
+from car_manager import CarManager, MOVE_INCREMENT
+from player import Player, FINISH_LINE_Y
 from scoreboard import Scoreboard
 
 
@@ -10,6 +10,8 @@ screen.setup(width=600, height=600)
 screen.tracer(0)
 
 player = Player()
+car_manager = CarManager()
+scoreboard = Scoreboard()
 
 screen.listen()
 screen.onkey(player.up, "Up")
@@ -17,8 +19,22 @@ screen.onkey(player.up, "Up")
 game_is_on = True
 while game_is_on:
     time.sleep(0.1)
-    car = CarManager()
-    car.move()
+    car_manager.create_car()
+    car_manager.move_cars()
+
+    # When the turtle hits the top edge
+    if player.ycor() > FINISH_LINE_Y:
+        player.refresh()
+        scoreboard.increase_level()
+        car_manager.speed += MOVE_INCREMENT
+
+    for car in car_manager.car_list:
+        if ((car.ycor() - 15 < player.ycor() < car.ycor() + 15)
+                and (car.xcor() - 15 < player.xcor() < car.xcor() + 15)
+                and player.distance(car) < 15):
+            scoreboard.game_over()
+            game_is_on = False
+
     screen.update()
 
 screen.exitonclick()
