@@ -21,52 +21,16 @@ with open("./Input/Letters/starting_letter.txt", "r") as file:
     #Hint2: This method will also help you: https://www.w3schools.com/python/ref_string_replace.asp
         #Hint3: THis method will help you: https://www.w3schools.com/python/ref_string_strip.asp
 
-# Reading a file
-# with open("my_file.txt") as file:
-#     contents = file.read()
-#     print(contents)
+        # Reading a file
+        # with open("my_file.txt") as file:
+        #     contents = file.read()
+        #     print(contents)
 
-# Writing a file
-# with open("my_file.txt", mode="a") as file:
-#     file.write("New text.")
+        # Writing a file
+        # with open("my_file.txt", mode="a") as file:
+        #     file.write("New text.")
 
-# Appending to a file
-with open("my_file.txt", mode="w") as file:
-    file.write("New text.")
+        # Appending to a file
+        # with open("my_file.txt", mode="w") as file:
+        #     file.write("New text.")
 
-        # File
-        # path
-        # 
-        # /
-        # 
-        # / Work
-        # 
-        # / Work / report.doc
-        # 
-        # / Work / Project
-        # 
-        # / Work / Project / talk.ppt
-        # 
-        # Absoulte
-        # file
-        # path
-        # -./ Users / Work / Project / talk.ppt
-        # 
-        # Relative
-        # file
-        # path
-        # -.Working
-        # directory
-        # -../ talk.ppt
-        # 
-        # -..means
-        # the
-        # current
-        # working
-        # directory
-        # -.Going
-        # upwards in the
-        # current
-        # directory
-        # -... / report.doc
-        # -... /../ Work / report.doc  # write dot dot twice if you want to go up twice in a file path
