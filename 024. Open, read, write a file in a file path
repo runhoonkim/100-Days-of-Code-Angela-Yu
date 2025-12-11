@@ -2,18 +2,20 @@
 #for each name in invited_names.txt
 #Replace the [name] placeholder with the actual name.
 #Save the letters in the folder "ReadyToSend".
+
+PLACEHOLDER = "[name]"
+
 with open("./Input/Letters/starting_letter.txt", "r") as file:
     file_content = file.read()
-    with open("./Input/Names/invited_names.txt") as names:
-        names_content = names.readlines()
 
-        for name in names_content:
-            # print(name.strip())
-            name = name.strip()
-            modified_content = file_content.replace("[name]", name)
-            # print(modified_content)
-            with open(f"./Output/ReadyToSend/{name}.txt", "w") as letter:
-                letter.write(modified_content)
+with open("./Input/Names/invited_names.txt") as names_file:
+    names_content = names_file.readlines()
+
+    for name in names_content:
+        name = name.strip()
+        modified_content = file_content.replace(PLACEHOLDER, name)
+        with open(f"./Output/ReadyToSend/letter_for_{name}.txt", "w") as letter:
+            letter.write(modified_content)
 
 
 
