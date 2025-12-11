@@ -1,0 +1,21 @@
+#Central Park Squirrel Data Analysis
+import pandas as pd
+df = pd.read_csv("2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv")
+# df.info()
+# print(df.head())
+# print(df['Primary Fur Color'].unique())
+gray_count = df[df['Primary Fur Color'] == 'Gray']['Primary Fur Color'].count()
+cinnamon_count = df[df['Primary Fur Color'] == 'Cinnamon']['Primary Fur Color'].count()
+black_count = df[df['Primary Fur Color'] == 'black']['Primary Fur Color'].count()
+
+data_dict = {
+    "Fur color": ["Gray", "Cinnamon", "Black"],
+    "Count": [gray_count, cinnamon_count, black_count]
+}
+
+data = pd.DataFrame(data_dict)
+data.to_csv("squirrel_color_count.csv")
+
+
+
+
