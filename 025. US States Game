@@ -1,0 +1,35 @@
+import turtle
+import pandas as pd
+
+screen = turtle.Screen()
+screen.title("U.S. States Game")
+
+image = "blank_states_img.gif"
+screen.addshape(image)
+
+turtle.shape(image)
+
+data = pd.read_csv("50_states.csv")
+data_dict = {row['state']: (row['x'], row['y']) for index, row in data.iterrows()}
+answer_list = []
+
+correct_guesses = 0
+while correct_guesses < 50:
+    answer_state = screen.textinput(title=f"{correct_guesses}/50 States Correct", prompt="Enter state: ").title()
+    if answer_state in data_dict.keys():
+        correct_guesses += 1
+        pen = turtle.Turtle()
+        pen.penup()
+        pen.hideturtle()
+        pen.goto(data_dict[answer_state])
+        pen.write(answer_state)
+        answer_list.append(answer_state)
+
+# def get_mouse_click_coor(x, y):
+#     print(x, y)
+#
+# turtle.onscreenclick(get_mouse_click_coor)
+#
+# turtle.mainloop()
+
+screen.exitonclick()
