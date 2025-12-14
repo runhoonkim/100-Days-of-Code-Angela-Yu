@@ -38,9 +38,10 @@ def flip_card(num):
 
 # ------------------------ DELETE WORD ------------------------ #
 def delete_and_get_word():
-    global data
+    global data, remain_words
     ans_word = canvas.itemcget(word, "text")
     data = data[data[ans_lang] != ans_word]
+    remain_words = len(data)
     get_new_word()
 
 # ------------------------ UI SETUP ------------------------ #
@@ -64,7 +65,7 @@ word = canvas.create_text(400, 263, text=data[guess_lang].sample(n=1).item(), fo
 canvas.grid(row=0, column=0, columnspan=2)
 
 # Buttons
-right_button = Button(image=right, highlightthickness=0, highlightbackground=BACKGROUND_COLOR, command=get_new_word)
+right_button = Button(image=right, highlightthickness=0, highlightbackground=BACKGROUND_COLOR, command=delete_and_get_word)
 wrong_button = Button(image=wrong, highlightthickness=0, highlightbackground=BACKGROUND_COLOR, command=get_new_word)
 right_button.grid(row=1, column=1)
 wrong_button.grid(row=1, column=0)
