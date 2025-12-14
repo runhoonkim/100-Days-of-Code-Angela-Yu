@@ -12,12 +12,7 @@ data = pd.read_csv("data/french_words.csv")
 
 guess_lang, ans_lang = data.columns[:2]
 
-# Keep track of guessed words
-guess_word_list = []
-
-# A dictionary of words to be guessed and answer
 words = dict(zip(data[guess_lang], data[ans_lang]))
-
 
 # ------------------------ STATE ------------------------ #
 current_word = None          # front word currently shown
