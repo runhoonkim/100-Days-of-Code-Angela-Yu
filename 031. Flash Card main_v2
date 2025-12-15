@@ -99,6 +99,4 @@ window.mainloop()
 words = {fr:[en] for fr, en in words.items()}
 df = pd.DataFrame(words)
 df_transposed = df.transpose()
-df_transposed = df_transposed.iloc[1:]
-df_transposed.to_csv("data/words_to_learn.csv")
-
+df_transposed.to_csv("data/words_to_learn.csv", header=False)
