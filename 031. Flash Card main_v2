@@ -8,7 +8,10 @@ FONT_NAME = "Arial"
 FLIP_DELAY_MS = 3000
 
 # ------------------------ DATA SETUP ------------------------ #
-data = pd.read_csv("data/french_words.csv")
+try:
+    data = pd.read_csv("words_to_learn.csv")
+except FileNotFoundError:
+    data = pd.read_csv("data/french_words.csv")
 
 guess_lang, ans_lang = data.columns[:2]
 
@@ -37,8 +40,8 @@ def show_new_card():
     is_front = True
 
     canvas.itemconfig(card, image=card_front)
-    canvas.itemconfig(title, text=guess_lang)
-    canvas.itemconfig(word, text=current_word)
+    canvas.itemconfig(title, text=guess_lang, fill="black")
+    canvas.itemconfig(word, text=current_word, fill="black")
 
     schedule_flip()
 
@@ -52,8 +55,8 @@ def flip_card():
 
     is_front = False
     canvas.itemconfig(card, image=card_back)
-    canvas.itemconfig(title, text=ans_lang)
-    canvas.itemconfig(word, text=words[current_word])
+    canvas.itemconfig(title, text=ans_lang, fill="white")
+    canvas.itemconfig(word, text=words[current_word], fill="white")
 
 def mark_known():
     """Remove the current word from the pool and go to the next."""
@@ -69,8 +72,6 @@ def mark_unknown():
 window = Tk()
 window.title("Flashy")
 window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
-
-window.after(3000, flip_card)
 
 # Load images
 card_front = PhotoImage(file="images/card_front.png")
@@ -95,5 +96,9 @@ show_new_card()
 
 window.mainloop()
 
-
+words = {fr:[en] for fr, en in words.items()}
+df = pd.DataFrame(words)
+df_transposed = df.transpose()
+df_transposed = df_transposed.iloc[1:]
+df_transposed.to_csv("data/words_to_learn.csv")
 
