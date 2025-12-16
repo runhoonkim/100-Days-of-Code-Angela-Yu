@@ -11,7 +11,7 @@ FLIP_DELAY_MS = 3000
 try:
     data = pd.read_csv("words_to_learn.csv")
 except FileNotFoundError:
-    data = pd.read_csv("data/french_words.csv")
+    data = pd.read_csv("data/vietnamese_words.csv")
 
 guess_lang, ans_lang = data.columns[:2]
 
