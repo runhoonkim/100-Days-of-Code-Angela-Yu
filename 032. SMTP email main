@@ -1,3 +1,17 @@
-app_password = "aoci aakb ltkb mfqw"
-gmail = "kimyounghoon969@gmail.com"
-gmail_pwd = "KjuskHEOCUfVYFi!"
+import smtplib
+
+APP_PASSWORD = "hgthyaeiysflpgpp"
+GMAIL = "kimyounghoon969@gmail.com"
+YAHOO = "kimyounghoon969@yahoo.com"
+
+# GMAIL_PWD = "KjuskHEOCUfVYFi!"
+# YAHOO_PWD = "j4D7TjUoYrVEAWu!"
+
+with smtplib.SMTP("smtp.gmail.com") as connection:
+    connection.starttls()
+    connection.login(user=GMAIL, password=APP_PASSWORD)
+    connection.sendmail(
+        from_addr=GMAIL, 
+        to_addrs=YAHOO, 
+        msg="Subject:Hello\n\nThis is the body of my email."
+        )
