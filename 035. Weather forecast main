@@ -14,5 +14,13 @@ params = {
 
 response = requests.get(url=URL, params=params)
 response.raise_for_status()
-data = response.json()
-print(data)
+weather_data = response.json()
+weather_id_list = [int(dict['weather'][0]['id']) for dict in weather_data['list']]
+
+will_rain = False
+for weather_id in weather_id_list:
+    if weather_id < 700:
+        will_rain = True
+
+if will_rain:
+    print("Bring an umbrella.")
