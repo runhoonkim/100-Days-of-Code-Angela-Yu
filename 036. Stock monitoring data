@@ -1,3 +1,45 @@
+news_data = [
+  {
+    'source': {
+      'id': 'financial-post',
+      'name': 'Financial Post'
+    },
+    'author': 'The Associated Press',
+    'title': 'Bolivia lifts restrictions on satellite companies like Starlink to upgrade its internet connectivity',
+    'description': 'LA PAZ, Bolivia (AP) — Bolivia’s new government on Tuesday issued a decree that will allow global satellite internet companies such as Starlink or Kuiper to provide internet access across the Andean nation as it tries to upgrade its technology and speed up it…',
+    'url': 'https://financialpost.com/pmn/bolivia-lifts-restrictions-on-satellite-companies-like-starlink-to-upgrade-its-internet-connectivity',
+    'urlToImage': 'https://smartcdn.gprod.postmedia.digital/financialpost/wp-content/uploads/2025/12/69261ce52c35853a590770cajpeg.jpg',
+    'publishedAt': '2025-12-24T00:12:50Z',
+    'content': 'LA PAZ, Bolivia (AP) Bolivias new government on Tuesday issued a decree that will allow global satellite internet companies such as Starlink or Kuiper to provide internet access across the Andean nat… [+4912 chars]'
+  },
+  {
+    'source': {
+      'id': None,
+      'name': 'Boston Herald'
+    },
+    'author': 'Tribune News Service',
+    'title': 'Nvidia gains, hospitals hurt: Congress winners and losers',
+    'description': 'The Republican-controlled Congress has been very good to most of corporate America this year.',
+    'url': 'https://www.bostonherald.com/2025/12/23/congress-corporate-winners-losers/',
+    'urlToImage': 'https://www.bostonherald.com/wp-content/uploads/2025/12/202512230515MCT_____PHOTO____BIZ-CONGRESS-CORPORATIONS-FILEPIC-GET.jpg?w=1024&h=683',
+    'publishedAt': '2025-12-23T23:19:51Z',
+    'content': 'By Erik Wasson and Steven T. Dennis, Bloomberg News\r\nThe Republican-controlled Congress has been very good to most of corporate America this year. Foremost among the boons is a $4 trillion tax cut pa… [+7806 chars]'
+  },
+  {
+    'source': {
+      'id': None,
+      'name': 'MarketBeat'
+    },
+    'author': 'Nathan Reiff, MarketBeat',
+    'title': 'Why CorMedix Could be the Biopharma Name to Watch Early in 2026',
+    'description': 'CorMedix is a promising biopharma firm in the catheter lock solution space. Continued success for its top products could fuel significant growth into 2026.',
+    'url': 'https://www.marketbeat.com/originals/why-cormedix-could-be-the-biopharma-name-to-watch-early-in-2026/?utm_source=yahoofinance&amp;utm_medium=yahoofinance',
+    'urlToImage': 'https://media.zenfs.com/en/marketbeat_955/933fd72f5febaf5b1c9bc3794af20ec1',
+    'publishedAt': '2025-12-23T20:20:00Z',
+    'content': "CorMedix signage outside a biopharmaceutical laboratory, signifying the company's promising clinical-stage results.\r\n<ul><li>CorMedix is best known for its catheter lock solutions, products designed … [+5130 chars]"
+  }
+]
+
 stock_data = {
   'Meta Data': {
     '1. Information': 'Daily Prices (open, high, low, close) and Volumes',
