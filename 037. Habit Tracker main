@@ -1,0 +1,74 @@
+import requests
+from dotenv import load_dotenv
+load_dotenv()
+import os
+import datetime as dt
+
+################ CREATE A USER ################
+
+PIXELA_ENDPOINT = "https://pixe.la/v1/users"
+PIXELA_TOKEN = os.getenv("PIXELA_TOKEN")
+PIXELA_USERNAME = os.getenv("PIXELA_USERNAME")
+GRAPH_ID = os.getenv("GRAPH_ID")
+QUANTITY = "10"
+
+
+user_params = {
+    "token": PIXELA_TOKEN,
+    "username": PIXELA_USERNAME,
+    "agreeTermsOfService": "yes",
+    "notMinor": "yes",
+}
+
+# response = requests.post(url=PIXELA_ENDPOINT, json=user_params)
+
+################ CREATE A GRAPH ################
+
+GRAPH_ENDPOINT = f"{PIXELA_ENDPOINT}/{PIXELA_USERNAME}/graphs"
+graph_config = {
+    "id": GRAPH_ID,
+    "name": "Vietnamese Graph",
+    "unit": "Minutes",
+    "type": "int",
+    "color": "shibafu",
+}
+
+headers = {
+    "X-USER-TOKEN": PIXELA_TOKEN,
+}
+
+# response = requests.post(url=GRAPH_ENDPOINT, json=graph_config, headers=headers)
+
+################ POST A PIXEL ################
+
+# date.today().strftime("%Y%m%d"),
+year = int(input("Year: "))
+month = int(input("Month: "))
+day = int(input("Day: "))
+quantity = input("How many time did you study?: ")
+date = dt.datetime(year=year, month=month, day=day).strftime("%Y%m%d")
+
+POST_PIXEL_ENDPOINT = f"{PIXELA_ENDPOINT}/{PIXELA_USERNAME}/graphs/{GRAPH_ID}"
+post_pixel_params = {
+    "date": date,
+    "quantity": quantity,
+}
+
+response = requests.post(url=POST_PIXEL_ENDPOINT, json=post_pixel_params, headers=headers)
+print(response.text)
+
+################ UPDATE A PIXEL ################
+
+# PUT_PIXEL_ENDPOINT = f"{PIXELA_ENDPOINT}/{PIXELA_USERNAME}/graphs/{GRAPH_ID}/{date}"
+# put_pixel_params = {
+#     "quantity": "30",
+# }
+
+# response = requests.put(url=PUT_PIXEL_ENDPOINT, json=put_pixel_params, headers=headers)
+# print(response.text)
+
+################ DELETE A PIXEL ################
+
+# DEL_PIXEL_ENDPOINT = f"{PIXELA_ENDPOINT}/{PIXELA_USERNAME}/graphs/{GRAPH_ID}/{date}"
+# response = requests.delete(url=DEL_PIXEL_ENDPOINT, headers=headers)
+# print(response.text)
